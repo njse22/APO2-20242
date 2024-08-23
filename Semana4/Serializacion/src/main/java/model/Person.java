@@ -1,6 +1,6 @@
 package model;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private String name;
     private int age;
     private String cc;
@@ -33,5 +33,28 @@ public class Person {
 
     public void setCc(String cc) {
         this.cc = cc;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", cc='" + cc + '\'' +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        // Primer criterio de comparación
+        int difference = this.age - o.getAge();
+
+        // Segundo criterio de comparación
+        if ( difference == 0){
+            difference = this.name.compareTo(o.getName());
+        }
+
+        // Resultado de la comparación
+        return difference;
     }
 }
