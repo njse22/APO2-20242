@@ -16,6 +16,102 @@ public class BST <T extends Comparable<T>> {
         }
     }
 
+    public void delete(T value){
+        // CASO BASE 0: EL arbol esta vacio
+        if(root == null){
+            // no se puede eliminar
+        }else {
+            // no esta vacio
+            delete(null ,root, value);
+        }
+    }
+
+    private void delete(Node<T> parent,  Node<T> current, T value){
+        // caso base -> encuentro el nodo
+        if(current.getValue().compareTo(value) == 0){
+            // CASO BASE 1: es un nodo hoja
+            if(current.getLeft() == null && current.getRight() == null) {
+                // CASO BASE 1.1: es un nodo hoja y es la raiz
+                if(current == root){
+                    root = null;
+                }
+                // CASO BASE 1.2: es un nodo hoja y es un hijo izquierdo
+                else if(parent.getLeft() == current){
+                    parent.setLeft(null);
+                }
+                // CASO BASE 1.3: es un nodo hoja y es un hijo derecho
+                else if(parent.getRight() == current){
+                    parent.setRight(null);
+                }
+            }
+            // CASO BASE 2. tiene unicamente un hijo izquierdo
+            else if (current.getLeft() != null && current.getRight() == null) {
+                // CASO BASE 2.1. es la raiz
+                if(current == root){
+                    root = current.getLeft();
+                }
+                // CASO BASE 2.1. no es la raiz
+                else {
+                    // CASO BASE 2.1.1. el nodo actual es un hijo izquierdo
+                    if(parent.getLeft() == current){
+                        parent.setLeft(current.getLeft());
+                    }
+                    // CASO BASE 2.1.2. el nodo actual es un hijo Derecho
+                    else {
+                        parent.setRight(current.getLeft());
+                    }
+                }
+            }
+            // CASO BASE 3. tiene unicamente un hijo derecho
+            else if (current.getLeft() == null && current.getRight() != null) {
+                // es la raiz
+                if(root == current){
+                    root = current.getRight();
+                }
+                // no es la raiz
+                else {
+                    // CASO BASE 3.2.1. el nodo actual es un hijo izquierdo
+                    if(parent.getLeft() == current){
+                       parent.setLeft(current.getRight());
+                    }
+                    // CASO BASE 3.2.2. el nodo actual es un hijo derecho
+                    else {
+                        parent.setRight(current.getRight());
+                    }
+                }
+            }
+            // CASO BASE 4. Tiene ambos hijos
+            else if (current.getLeft() != null && current.getRight() != null) {
+                // tambien se puede hacer con el prodecesor
+                Node<T> successor = getMax(current.getLeft());
+                current.setValue(successor.getValue());
+                delete(current, current.getLeft(), successor.getValue());
+            }
+        }
+        // CASOS RECURSIVOS:
+        // Buscar por izquierda
+        else if (current.getValue().compareTo(value) > 0) {
+            delete(current, current.getLeft(), value);
+        }
+        // Buscar por derecha
+        else if (current.getValue().compareTo(value) < 0) {
+            delete(current, current.getRight(), value);
+        }
+    }
+
+    public Node<T> getMax(){
+        return getMax(root);
+    }
+
+    private Node<T> getMax(Node<T> current){
+       if(current.getRight() == null){
+           return current;
+       }
+       else {
+           return getMax(current.getRight());
+       }
+    }
+
 
     public String inOrder(){
         String msg = "";
