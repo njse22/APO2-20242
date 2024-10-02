@@ -21,13 +21,13 @@ public class BST <T extends Comparable<T>> {
         if(root == null){
             // no se puede eliminar
         }else {
-            // no esta vacio
+            // CASO 0.1: El arbol no esta vacio
             delete(null ,root, value);
         }
     }
 
     private void delete(Node<T> parent,  Node<T> current, T value){
-        // caso base -> encuentro el nodo
+        // CASO BASE:  -> encuentro el nodo
         if(current.getValue().compareTo(value) == 0){
             // CASO BASE 1: es un nodo hoja
             if(current.getLeft() == null && current.getRight() == null) {
@@ -64,11 +64,11 @@ public class BST <T extends Comparable<T>> {
             }
             // CASO BASE 3. tiene unicamente un hijo derecho
             else if (current.getLeft() == null && current.getRight() != null) {
-                // es la raiz
+                // CASO BASE 3.1: es la raiz
                 if(root == current){
                     root = current.getRight();
                 }
-                // no es la raiz
+                // CASO BASE 3.2: no es la raiz
                 else {
                     // CASO BASE 3.2.1. el nodo actual es un hijo izquierdo
                     if(parent.getLeft() == current){
@@ -82,10 +82,11 @@ public class BST <T extends Comparable<T>> {
             }
             // CASO BASE 4. Tiene ambos hijos
             else if (current.getLeft() != null && current.getRight() != null) {
-                // tambien se puede hacer con el prodecesor
-                Node<T> successor = getMax(current.getLeft());
-                current.setValue(successor.getValue());
-                delete(current, current.getLeft(), successor.getValue());
+                // Tambien se puede hacer con el SUCESSOR -> el menor de los mayores
+                // PREDECESSOR -> eL Mayor de los Menores
+                Node<T> predecessor = getMax(current.getLeft()); // El Mayor de los menores
+                current.setValue(predecessor.getValue());
+                delete(current, current.getLeft(), predecessor.getValue());
             }
         }
         // CASOS RECURSIVOS:
