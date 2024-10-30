@@ -24,4 +24,18 @@ public class Position {
     public void setY(double y) {
         this.y = y;
     }
+
+    public void normalize(){
+        double normal = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        if(normal != 0){
+            x /= normal;
+            y /= normal;
+        }
+    }
+
+    public void setSpeed(int speed){
+        x *= speed;
+        y *= speed;
+    }
+
 }

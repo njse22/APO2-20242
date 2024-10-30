@@ -3,8 +3,10 @@ package org.icesi.animation.model;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.security.Key;
 import java.util.ArrayList;
 
 public class Avatar {
@@ -25,6 +27,10 @@ public class Avatar {
     private boolean down;
     private boolean right;
     private boolean left;
+
+    private boolean sPressed;
+    private boolean aPressed;
+
 
     public Avatar(Canvas canvas){
         this.canvas = canvas;
@@ -72,11 +78,16 @@ public class Avatar {
 
     public void setOnKeyPressed(KeyEvent event){
         switch (event.getCode()){
-            case A -> System.out.println("Tecla A");
            case UP -> {state = 1; upPressed = true; }
            case DOWN -> {state = 1; down = true;}
            case RIGHT -> {state= 1; right = true;}
            case LEFT -> {state = 1; left = true;}
+            case A -> {state = 1; aPressed = true;}
+            case S -> {state = 1; sPressed = true;}
+        }
+
+        if (aPressed && sPressed){
+            System.out.println("Here");
         }
     }
 
@@ -90,4 +101,7 @@ public class Avatar {
         }
     }
 
+    public Position getPosition() {
+        return position;
+    }
 }
