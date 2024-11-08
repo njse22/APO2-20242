@@ -1,5 +1,6 @@
 package structures;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 public class BST <T extends Comparable<T>> {
@@ -227,4 +228,25 @@ public class BST <T extends Comparable<T>> {
     public void setRoot(Node<T> root) {
         this.root = root;
     }
+
+    public void fromListToTree(ArrayList<T> list){
+        int start = 0;
+        int end = list.size() - 1;
+        fromListToTree(list, start, end);
+    }
+
+
+    private void fromListToTree(ArrayList<T> list, int start, int end){
+        if(start <= end){
+            int mid = (start + end)/2;
+
+            add(list.get(mid));
+
+            // izquierda
+            fromListToTree(list, start, mid-1);
+            // derecha
+            fromListToTree(list, mid+1, end);
+        }
+    }
+
 }

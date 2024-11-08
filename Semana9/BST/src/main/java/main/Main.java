@@ -2,6 +2,8 @@ package main;
 
 import structures.BST;
 
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -31,6 +33,15 @@ public class Main {
         //integerTree.add(30);
         //integerTree.add(55);
 
+        BST<Integer> listTree = new BST<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 1; i<10; i++){
+            list.add(i);
+        }
+
+        listTree.fromListToTree(list);
+
+        System.out.println(listTree.getRoot().getValue());
 
     }
 }

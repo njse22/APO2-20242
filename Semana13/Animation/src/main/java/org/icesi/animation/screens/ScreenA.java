@@ -11,30 +11,49 @@ import org.icesi.animation.model.Box;
 import org.icesi.animation.model.Position;
 import org.icesi.animation.util.IDistance;
 
+import java.util.ArrayList;
+
 public class ScreenA extends BaseScreen {
 
     private Avatar avatar;
     private Box box1;
 
+    private ArrayList<Box> boxes;
+
     public ScreenA(Canvas canvas) {
         super(canvas);
         this.avatar = new Avatar(super.canvas);
         this.box1 = new Box(super.canvas);
+        boxes = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            boxes.add(new Box(super.canvas));
+        }
     }
 
     @Override
     public void paint(){
         super.gc.setFill(Color.BLACK);
         super.gc.fillRect(0, 0, super.canvas.getWidth(), super.canvas.getHeight());
-        avatar.paint();
         box1.paint();
+        avatar.paint();
+
+       // if(!box1.isAlive()){
+       //     box1.start();
+       // }
 
         IDistance iDistance = (from, to) -> {
+            //
             return Math.sqrt(
                         Math.pow(from.getX() - to.getX(), 2) +
                                 Math.pow(from.getY() - to.getY(), 2)
             );
         };
+
+        for (Box box : boxes) {
+            double disBox = iDistance.distance(box.getPosition(), avatar.getPosition());
+            System.out.println(box + " : " + disBox);
+        }
 
         double distance = iDistance.distance(avatar.getPosition(), box1.getPosition());
 
