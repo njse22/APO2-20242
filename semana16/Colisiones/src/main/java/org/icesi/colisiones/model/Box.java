@@ -1,4 +1,4 @@
-package org.icesi.animation.model;
+package org.icesi.colisiones.model;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -11,14 +11,12 @@ public class Box extends Thread {
 
     private double y;
     private Position position;
-    private Color color;
 
     public Box(Canvas canvas){
         this.canvas = canvas;
         this.position = new Position(200, 200);
         graphicsContext = canvas.getGraphicsContext2D();
         this.y = position.getY();
-        color = Color.RED;
     }
 
     @Override
@@ -34,7 +32,7 @@ public class Box extends Thread {
     }
 
     public void paint(){
-        graphicsContext.setFill(this.color);
+        graphicsContext.setFill(Color.RED);
         graphicsContext.fillRect(position.getX(), position.getY(), 50, 50);
     }
 
@@ -44,9 +42,5 @@ public class Box extends Thread {
 
     public void setPosition(Position position) {
         this.position = position;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 }

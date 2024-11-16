@@ -17,6 +17,7 @@ public class ScreenA extends BaseScreen {
 
     private Avatar avatar;
     private Box box1;
+    private Box box2;
 
     private ArrayList<Box> boxes;
 
@@ -24,6 +25,11 @@ public class ScreenA extends BaseScreen {
         super(canvas);
         this.avatar = new Avatar(super.canvas);
         this.box1 = new Box(super.canvas);
+        this.box2 = new Box(super.canvas);
+
+        box2.setColor(Color.GREEN);
+        box2.setPosition(new Position(65, 65));
+
         boxes = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
@@ -36,6 +42,7 @@ public class ScreenA extends BaseScreen {
         super.gc.setFill(Color.BLACK);
         super.gc.fillRect(0, 0, super.canvas.getWidth(), super.canvas.getHeight());
         box1.paint();
+        box2.paint();
         avatar.paint();
 
        // if(!box1.isAlive()){
@@ -52,12 +59,12 @@ public class ScreenA extends BaseScreen {
 
         for (Box box : boxes) {
             double disBox = iDistance.distance(box.getPosition(), avatar.getPosition());
-            System.out.println(box + " : " + disBox);
+           // System.out.println(box + " : " + disBox);
         }
 
         double distance = iDistance.distance(avatar.getPosition(), box1.getPosition());
 
-        System.out.println(distance);
+        System.out.println( "distancia: " +distance);
 
         System.out.println(avatar.getPosition().getX());
 
@@ -82,14 +89,31 @@ public class ScreenA extends BaseScreen {
 
             // a la posición actual del elemento que queremo mover, hacemos
             // que varie, en la diferencia de elementos
-            box1.getPosition().setX(box1.getPosition().getX() + diff.getX());
-            box1.getPosition().setY(box1.getPosition().getY() + diff.getY());
+            box1.getPosition().setX(box1.getPosition().getX() - diff.getX());
+            box1.getPosition().setY(box1.getPosition().getY() - diff.getY());
 
             /*
             *     diff
             *  A ------> B
             * */
         }
+
+        double distance2 = iDistance.distance(avatar.getPosition(), box2.getPosition());
+        System.out.println("distance 2: " + distance2);
+
+        if (distance2 < 32){
+
+            System.out.println(box2.getPosition().getX() + ", " + avatar.getPosition().getX());
+
+            if(avatar.getPosition().getX() < box2.getPosition().getX() + 50){
+                avatar.getPosition().setX(box2.getPosition().getX() + 50);
+            }
+            if(avatar.getPosition().getY() < box2.getPosition().getY() + 50){
+                avatar.getPosition().setY(box2.getPosition().getY() + 50);
+            }
+        }
+
+
 
     }
 

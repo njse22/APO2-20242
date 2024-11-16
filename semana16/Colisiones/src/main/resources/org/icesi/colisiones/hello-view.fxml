@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.icesi.colisiones.HelloController">
+   <children>
+      <Canvas fx:id="canvas" height="390.0" layoutX="5.0" layoutY="5.0" width="587.0" focusTraversable="true"/>
+   </children>
+</AnchorPane>
